@@ -2,339 +2,396 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>A Little Letter for Zack ♡</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#fff1f6">
+  <title>a little letter for zack ♡</title>
 
-<style>
-* {
-  box-sizing: border-box;
-}
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-body {
-  margin: 0;
-  min-height: 100vh;
-  font-family: Georgia, serif;
-  background: #fff0f5;
-  color: #704b5b;
-  overflow-x: hidden;
-}
+    :root {
+      --pink: #f1c3d4;
+      --dark-pink: #b96e8b;
+      --text: #765261;
+      --paper: #fffafc;
+      --background: #fff0f5;
+    }
 
-.container {
-  width: min(90%, 650px);
-  margin: 45px auto;
-  padding: 30px 24px;
-  text-align: center;
-  background: #fffafc;
-  border: 1px solid #f3d3df;
-  border-radius: 24px;
-  box-shadow: 0 10px 35px #b8799630;
-}
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 24px 14px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background:
+        radial-gradient(ellipse at top left, #ffe1ec, transparent 55%),
+        radial-gradient(ellipse at bottom right, #f9dce8, transparent 50%),
+        var(--background);
+      color: var(--text);
+      font-family: Georgia, "Times New Roman", serif;
+      overflow-x: hidden;
+    }
 
-.tag {
-  font-size: 12px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: #bc829a;
-}
+    .page {
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+      padding: 38px 28px;
+      background: var(--paper);
+      border: 1px solid #f0d4df;
+      border-radius: 24px;
+      text-align: center;
+      box-shadow: 0 15px 50px #b96e8b20;
+      animation: enter 1s ease both;
+    }
 
-h1 {
-  font-size: clamp(30px, 7vw, 45px);
-  font-weight: normal;
-  margin: 18px 0 10px;
-}
+    .tiny-heading {
+      font-family: Arial, sans-serif;
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--dark-pink);
+    }
 
-.subtitle {
-  font-size: 14px;
-  font-style: italic;
-  color: #a77b8d;
-}
+    h1 {
+      margin: 24px 0 12px;
+      font-size: clamp(32px, 8vw, 49px);
+      line-height: 1.15;
+      font-weight: normal;
+    }
 
-.heart {
-  font-size: 35px;
-  margin: 20px 0;
-  animation: beat 1.5s infinite;
-}
+    .subtitle {
+      font-size: 14px;
+      font-style: italic;
+      line-height: 1.8;
+      color: #a78291;
+    }
 
-button {
-  border: none;
-  border-radius: 30px;
-  padding: 14px 23px;
-  background: #e9b6ca;
-  color: #653c50;
-  font-size: 14px;
-  cursor: pointer;
-  font-family: inherit;
-  transition: 0.3s;
-}
+    .main-heart {
+      display: inline-block;
+      margin: 22px 0;
+      color: #d98aaa;
+      font-size: 43px;
+      animation: heartbeat 1.8s infinite;
+    }
 
-button:hover {
-  background: #df9fba;
-  transform: translateY(-2px);
-}
+    .intro {
+      max-width: 380px;
+      margin: 0 auto 25px;
+      font-size: 15px;
+      line-height: 1.9;
+    }
 
-.letter {
-  display: none;
-  text-align: left;
-  line-height: 1.9;
-  font-size: 15px;
-  margin-top: 30px;
-  padding: 22px;
-  background: #fff3f7;
-  border: 1px dashed #e5b3c6;
-  border-radius: 16px;
-  animation: appear 0.8s ease;
-}
+    button {
+      padding: 15px 24px;
+      border: 1px solid #e7b6c9;
+      border-radius: 50px;
+      background: #f6dce6;
+      color: #75465a;
+      font-family: inherit;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background 0.25s, transform 0.25s;
+    }
 
-.letter.show {
-  display: block;
-}
+    button:hover {
+      background: #efc4d5;
+      transform: translateY(-2px);
+    }
 
-.photos {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
-  margin: 28px 0;
-}
+    button:focus-visible,
+    a:focus-visible {
+      outline: 2px solid var(--dark-pink);
+      outline-offset: 4px;
+    }
 
-.photo-card {
-  background: white;
-  padding: 9px 9px 15px;
-  box-shadow: 0 4px 15px #d9a2b733;
-  transform: rotate(-2deg);
-}
+    .letter {
+      display: none;
+      margin-top: 32px;
+      padding: 25px 22px;
+      background: #fff3f7;
+      border: 1px dashed #e5b5c8;
+      border-radius: 17px;
+      text-align: left;
+      font-size: 15px;
+      line-height: 2;
+    }
 
-.photo-card:nth-child(2) {
-  transform: rotate(2deg);
-}
+    .letter.show {
+      display: block;
+      animation: appear 0.8s ease both;
+    }
 
-.photo-card img {
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-  display: block;
-}
+    .letter p {
+      margin: 0 0 19px;
+    }
 
-.photo-card p {
-  font-size: 12px;
-  margin-bottom: 0;
-  text-align: center;
-  font-style: italic;
-}
+    .letter .greeting {
+      font-size: 21px;
+      color: #b76f8d;
+    }
 
-.music {
-  text-align: center;
-  margin: 25px 0;
-}
+    .signoff {
+      margin-top: 28px !important;
+      text-align: right;
+      font-style: italic;
+    }
 
-.music iframe {
-  width: 100%;
-  max-width: 350px;
-  height: 80px;
-  border: 0;
-  border-radius: 12px;
-}
+    .music {
+      margin-top: 32px;
+      padding-top: 22px;
+      border-top: 1px solid #f1dce5;
+    }
 
-.music a {
-  color: #a45f7d;
-  font-size: 13px;
-}
+    .music-title {
+      font-size: 17px;
+    }
 
-.signoff {
-  text-align: right;
-  margin-top: 25px;
-  font-style: italic;
-}
+    .song-name {
+      font-size: 13px;
+      font-style: italic;
+      color: #a78291;
+    }
 
-.footer {
-  margin-top: 30px;
-  font-size: 12px;
-  color: #b38a9c;
-}
+    .music iframe {
+      width: 100%;
+      max-width: 350px;
+      height: 152px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 12px;
+    }
 
-.floating-heart {
-  position: fixed;
-  bottom: -30px;
-  pointer-events: none;
-  animation: floatUp 5s linear forwards;
-  z-index: 5;
-}
+    .music a {
+      display: inline-block;
+      margin-top: 10px;
+      color: #a45f7d;
+      font-size: 13px;
+    }
 
-@keyframes beat {
-  50% { transform: scale(1.15); }
-}
+    .footer {
+      margin-top: 30px;
+      font-size: 11px;
+      letter-spacing: 1px;
+      color: #b795a4;
+    }
 
-@keyframes appear {
-  from { opacity: 0; transform: translateY(12px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+    .floating-heart {
+      position: fixed;
+      bottom: -35px;
+      z-index: 10;
+      pointer-events: none;
+      animation: float-up 5s linear forwards;
+    }
 
-@keyframes floatUp {
-  to {
-    transform: translateY(-110vh) rotate(25deg);
-    opacity: 0;
-  }
-}
+    @keyframes enter {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-@media (max-width: 420px) {
-  .container {
-    padding: 25px 17px;
-  }
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-  .letter {
-    padding: 17px;
-    font-size: 14px;
-  }
-}
-</style>
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.12); }
+    }
+
+    @keyframes float-up {
+      0% {
+        opacity: 0;
+        transform: translateY(0) rotate(0);
+      }
+      15% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-110vh) rotate(35deg);
+      }
+    }
+
+    @media (max-width: 420px) {
+      .page {
+        padding: 30px 19px;
+      }
+
+      .letter {
+        padding: 20px 17px;
+        font-size: 14px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
 </head>
 
 <body>
-<main class="container">
-  <p class="tag">a little something for you ♡</p>
+  <main class="page">
+    <p class="tiny-heading">a little something for you ♡</p>
 
-  <h1>for my favorite tanda, Zack</h1>
+    <h1>for my favorite tanda, Zack</h1>
 
-  <p class="subtitle">
-    a tiny corner of the internet, made with care.
-  </p>
-
-  <div class="heart">♡</div>
-
-  <p>
-    hi, you. i made something for you, so take your time
-    and open it whenever you're ready.
-  </p>
-
-  <button onclick="openLetter()" id="openButton">
-    open your letter 💌
-  </button>
-
-  <section class="letter" id="letter">
-    <p>hiii, Zack. ♡</p>
-
-    <p>
-      honestly, i don't really know how to start this letter
-      because there's so much i want to say, but somehow,
-      words never seem enough.
+    <p class="subtitle">
+      a little corner of the internet, made with care.
     </p>
 
-    <p>
-      i'm genuinely thankful that i got the chance to know you.
-      you have this way of making ordinary moments feel special,
-      and sometimes, even the smallest things you do stay in my
-      mind longer than you'd probably expect.
+    <div class="main-heart" aria-hidden="true">♡</div>
+
+    <p class="intro">
+      hi, you. i made something for you.
+      take your time and open it whenever you're ready.
     </p>
 
-    <p>
-      i appreciate your presence, your kindness, our conversations,
-      and all the little moments that make me smile without even
-      realizing it. i hope you know that you matter, not just
-      because of what you do for me, but because of the person
-      you are.
+    <button id="openButton" type="button" onclick="openLetter()">
+      open your letter 💌
+    </button>
+
+    <section class="letter" id="letter" aria-label="A letter for Zack">
+      <p class="greeting">hiii, Zack. ♡</p>
+
+      <p>
+        honestly, i don't really know how to start this letter
+        because there's so much i want to say, but somehow,
+        words never seem enough.
+      </p>
+
+      <p>
+        i'm genuinely thankful that i got the chance to know you.
+        you have this way of making ordinary moments feel special,
+        and sometimes, even the smallest things you do stay in my
+        mind longer than you'd probably expect.
+      </p>
+
+      <p>
+        i appreciate your presence, our conversations, your
+        kindness, and all the little moments that make me smile
+        without even realizing it. i hope you know that you matter,
+        not just because of what you do for me, but because of the
+        person you are.
+      </p>
+
+      <p>
+        i don't want this letter to make you feel pressured or
+        obligated to say anything back. i just wanted to be genuine
+        with you and let you know that i'm happy our paths crossed.
+      </p>
+
+      <p>
+        i hope life is gentle with you. i hope you keep finding
+        reasons to smile, even on days when everything feels tiring.
+        please remember to eat well, rest when you need to, and
+        take care of yourself, okay?
+      </p>
+
+      <p>
+        and if you ever have a difficult day, i hope you remember
+        that there are people who appreciate you more than you know.
+        i'm glad i get to be one of those people.
+      </p>
+
+      <p>
+        maybe this is a little cheesy, but some people just make
+        life feel a little warmer. you're one of those people for me.
+      </p>
+
+      <p>
+        thank you for being you, Zack. i hope this little letter
+        makes you smile, even just a little. you deserve kindness,
+        happiness, and good things that find their way to you.
+      </p>
+
+      <p class="signoff">
+        take care always,<br>
+        yours, Gigi ♡
+      </p>
+    </section>
+
+    <section class="music">
+      <p class="music-title">🎧 a song for this little corner</p>
+      <p class="song-name">Daylight — Taylor Swift</p>
+
+      <iframe
+        src="https://open.spotify.com/embed/track/1fzAuUVbzlhZ1lJAx9PtY6"
+        title="Daylight by Taylor Swift on Spotify"
+        loading="lazy"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+      </iframe>
+
+      <p>
+        <a
+          href="https://open.spotify.com/search/Daylight%20Taylor%20Swift"
+          target="_blank"
+          rel="noopener noreferrer">
+          open the song on Spotify ♡
+        </a>
+      </p>
+    </section>
+
+    <p class="footer">
+      made with a little love and a lot of thought ♡
     </p>
+  </main>
 
-    <p>
-      i don't want this letter to make you feel pressured or
-      obligated to say anything back. i just wanted to be genuine
-      with you for once and let you know that i'm happy our paths
-      crossed.
-    </p>
+  <script>
+    function openLetter() {
+      const letter = document.getElementById("letter");
+      const button = document.getElementById("openButton");
 
-    <p>
-      i hope life is gentle with you. i hope you keep finding
-      reasons to smile, even on days when everything feels tiring.
-      please remember to eat well, rest when you need to, and
-      take care of yourself, okay?
-    </p>
+      if (letter.classList.contains("show")) return;
 
-    <p>
-      and if you ever have a difficult day, i hope you remember
-      that there are people who appreciate you more than you know.
-      i'm glad i get to be one of those people.
-    </p>
+      letter.classList.add("show");
+      button.style.display = "none";
 
-    <p>
-      maybe this is a little cheesy, but some people just make
-      life feel a little warmer. you're one of those people for me.
-    </p>
+      letter.setAttribute("tabindex", "-1");
+      letter.focus({ preventScroll: true });
 
-    <div class="photos">
-      <div class="photo-card">
-        <img src="images/gigi-photo-1.jpg" alt="A photo">
-        <p>a little piece of me ♡</p>
-      </div>
+      for (let i = 0; i < 18; i++) {
+        setTimeout(createHeart, i * 140);
+      }
+    }
 
-      <div class="photo-card">
-        <img src="images/gigi-photo-2.jpg" alt="Another photo">
-        <p>a little memory ♡</p>
-      </div>
-    </div>
+    function createHeart() {
+      const heart = document.createElement("span");
+      const hearts = ["♡", "♥", "💕", "୨ৎ"];
 
-    <p>
-      anyway, that's all for now. thank you for being you,
-      Zack. i hope this little website makes you smile,
-      even just a little.
-    </p>
+      heart.className = "floating-heart";
+      heart.textContent = hearts[
+        Math.floor(Math.random() * hearts.length)
+      ];
 
-    <p class="signoff">
-      take care always,<br>
-      yours, Gigi ♡
-    </p>
-  </section>
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = (14 + Math.random() * 18) + "px";
+      heart.style.color = "#d98aaa";
 
-  <section class="music">
-    <p>🎧 a song for this little corner</p>
-    <p><em>Daylight — Taylor Swift</em></p>
+      document.body.appendChild(heart);
 
-    <iframe
-      src="https://open.spotify.com/embed/track/1fzAuUVbzlhZ1lJAx9PtY6"
-      title="Daylight by Taylor Swift"
-      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-      loading="lazy">
-    </iframe>
-
-    <p>
-      <a href="https://open.spotify.com/search/Daylight%20Taylor%20Swift"
-         target="_blank" rel="noopener noreferrer">
-        open the song on Spotify ♡
-      </a>
-    </p>
-  </section>
-
-  <p class="footer">
-    made with a little love and a lot of thought ♡
-  </p>
-</main>
-
-<script>
-function openLetter() {
-  const letter = document.getElementById("letter");
-  const button = document.getElementById("openButton");
-
-  letter.classList.add("show");
-  button.style.display = "none";
-
-  for (let i = 0; i < 15; i++) {
-    setTimeout(createHeart, i * 160);
-  }
-}
-
-function createHeart() {
-  const heart = document.createElement("div");
-  heart.className = "floating-heart";
-  heart.textContent = ["♡", "♥", "💗", "💕"][
-    Math.floor(Math.random() * 4)
-  ];
-
-  heart.style.left = Math.random() * 100 + "vw";
-  heart.style.fontSize = (14 + Math.random() * 18) + "px";
-  heart.style.color = "#d98eae";
-
-  document.body.appendChild(heart);
-
-  setTimeout(() => heart.remove(), 5000);
-}
-</script>
+      setTimeout(() => heart.remove(), 5000);
+    }
+  </script>
 </body>
 </html>
